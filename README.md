@@ -66,22 +66,39 @@ export PATH=/opt/homebrew/bin:$PATH
 
 새로운 터미널 창을 열고 다음과 같이 입력합니다.
 conda activate openpose
+
 mkdir workspace
+
 git clone https://github.com/gsethi2409/tf-pose-estimation.git
+
 cd tf-pose-estimation
+
 conda install numba scipy
+
 pip install -r requirements.txt
+
 conda install -c conda-forge tensorflow
+
 conda install swig
+
 cd tf_pose/pafprocess
+
 swig -python -c++ pafprocess.i && python3 setup.py build_ext --inplace
+
 cd ../..
+
 conda install -c conda-forge opencv
+
 pip3 install git+https://github.com/adrianc-a/tf-slim.git@remove_contrib
+
 cd models/graph/cmu
+
 bash download.sh
+
 cd ../../..
+
 pip3 install tensorflow-macos==2.7.0
+
 pip3 install opencv-python
 
 그리고 저는 웹캠을 이용하여 진행할 것이기에 다음의 명령어를 사용해주시면 됩니다.
