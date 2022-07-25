@@ -60,11 +60,16 @@ export PATH=/opt/homebrew/bin:$PATH
 
 위의 내용을 복사하고 붙여넣기 해도 문제가 없습니다. 해당 명령어를 입력하고 ESC키를 누르고 :wq를 입력하면 저장이 됩니다.
 
+<img width="682" alt="스크린샷 2022-07-25 오후 1 58 27" src="https://user-images.githubusercontent.com/101043303/180701648-a4a283db-ddb7-4889-9050-36951455b370.png">
+
 그리고 sync명령어를 통해 현재 내용이 반영될 수 있도록 합니다.
+
+<img width="682" alt="스크린샷 2022-07-25 오후 1 58 58" src="https://user-images.githubusercontent.com/101043303/180701703-cedd4f87-5c7d-4881-b607-b30aacb4d6b4.png">
 
 그리고 brew install wget를 통해 wget 라이브러리를 설치할 수 있도록 합니다.
 
 새로운 터미널 창을 열고 다음과 같이 입력합니다.
+
 conda activate openpose
 
 mkdir workspace
@@ -104,4 +109,8 @@ pip3 install opencv-python
 그리고 저는 웹캠을 이용하여 진행할 것이기에 다음의 명령어를 사용해주시면 됩니다.
 
 python3 run_webcam.py --model=mobilenet_thin --resize=432x368 --camera=0
+
+git 명령어를 사용할 때, git이 깔려있지 않은 경우도 있습니다. 그럴 경우 다음의 창이 뜨게 되는데, 그냥 설치 누르시면 됩니다. 그러고 다시 실행하면 됩니다.
+
+<img width="610" alt="스크린샷 2022-07-24 오후 12 36 41" src="https://user-images.githubusercontent.com/101043303/180701449-5aa6ebc1-8d3d-40d4-bc8f-ee62dda1264a.png">
 
