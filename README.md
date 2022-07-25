@@ -38,3 +38,53 @@ conda create -n openpose python=3.8
 
 y를 누르시면 됩니다 ^ㅁ^
 
+가상환경이 다 만들어지면 다음과 같이 창이 뜹니다. 그리고 저는 openpose라는 이름의 가상환경을 만들었기 때문에 conda activate openpose라는 명령어를 통해서 가상환경을 활성화 시켜줍니다.
+
+<img width="697" alt="스크린샷 2022-07-24 오후 12 33 29" src="https://user-images.githubusercontent.com/101043303/180675009-0ac91e34-7474-4eaf-8c34-31f575cc384f.png">
+
+이제부터 실제 필요한 파일을 다운받고 더 필요한 작업을 시작하겠습니다.
+
+우선 brew를 설치해야 합니다. brew를 설치하는 방법은 https://brew.sh/index_ko 에 나와있습니다.
+
+하지만, 이를 직접 읽어보고 나에게 필요한 부분을 찾는 것은 어렵기때문에, 다음의 방안을 따라해주시면 됩니다.
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+이 명령어만 입력하면 brew가 설치되며 설치가 완료되면 터미널 창에 brew를 입력하여 봅니다.
+만약  zsh: command not found: brew 관련 오류가 발생할 시 다음의 명령어를 진행해주시면 됩니다.
+
+sudo vim ~/.zshrc
+
+그럼 다른 기존에 있던 내용이 있을 수 있고, 없을 수도 있는데, 신경 쓰지 말고 가장 아랫 줄에 다음의 구문을 추가하시면 됩니다.
+
+export PATH=/opt/homebrew/bin:$PATH
+
+위의 내용을 복사하고 붙여넣기 해도 문제가 없습니다. 해당 명령어를 입력하고 ESC키를 누르고 :wq를 입력하면 저장이 됩니다.
+
+그리고 sync명령어를 통해 현재 내용이 반영될 수 있도록 합니다.
+
+그리고 brew install wget를 통해 wget 라이브러리를 설치할 수 있도록 합니다.
+
+새로운 터미널 창을 열고 다음과 같이 입력합니다.
+conda activate openpose
+mkdir workspace
+git clone https://github.com/gsethi2409/tf-pose-estimation.git
+cd tf-pose-estimation
+conda install numba scipy
+pip install -r requirements.txt
+conda install -c conda-forge tensorflow
+conda install swig
+cd tf_pose/pafprocess
+swig -python -c++ pafprocess.i && python3 setup.py build_ext --inplace
+cd ../..
+conda install -c conda-forge opencv
+pip3 install git+https://github.com/adrianc-a/tf-slim.git@remove_contrib
+cd models/graph/cmu
+bash download.sh
+cd ../../..
+pip3 install tensorflow-macos==2.7.0
+pip3 install opencv-python
+
+그리고 저는 웹캠을 이용하여 진행할 것이기에 다음의 명령어를 사용해주시면 됩니다.
+
+python3 run_webcam.py --model=mobilenet_thin --resize=432x368 --camera=0
+
